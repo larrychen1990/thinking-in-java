@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GB2312" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>My first xml</comment>
+<entry key="age">23</entry>
+<entry key="name">Larry</entry>
+</properties>

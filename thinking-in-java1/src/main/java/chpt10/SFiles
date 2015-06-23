@@ -1,0 +1,21 @@
+  开启tomcat服务sudo /opt/apache-tomcat-6.0.29/bin/startup.sh
+  关闭tomcat服务sudo /opt/apache-tomcat-6.0.29/bin/shutdown.sh
+,,,,,,,
+cho*chendachao
+telnet： 172.16.0.50 chendc*chendacao
+邮箱：chendc*chendc
+UNIX root*123 king*king999
+
+九月 16, 2013 7:17:50 下午 org.apache.catalina.core.StandardContext reload
+INFO: Reloading this Context has started
+ng; -->赋权限,赋予用户权限
+conn king/briup;
+show user;user
+chendachao
+sqlplus king/briup
+sqlplus '/as sysdba'--》切换到sys超级用户
+drop user king;-->删除用户
+alter user king identied by king999;-->修改密码
+
+
+

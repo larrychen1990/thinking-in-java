@@ -1,0 +1,26 @@
+package chpt4;
+
+//: Leaf.java
+//Simple use of the "this" keyword
+
+public class Leaf {
+	private int i = 0;
+
+	Leaf  increment() {
+		i++;
+		return this;
+	}
+
+	void print() {
+		System.out.println("i = " + i);
+	}
+
+	public static void main(String[] args) {
+		Leaf x = new Leaf();
+		x.increment().increment().increment().print();
+//		x.increment();
+//		x.increment();
+//		x.increment();
+//		x.print();;
+	}
+} // /:~
