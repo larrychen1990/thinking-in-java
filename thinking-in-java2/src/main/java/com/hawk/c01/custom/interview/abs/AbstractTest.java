@@ -1,4 +1,4 @@
-package com.hawk.c01.custom.interview;
+package com.hawk.c01.custom.interview.abs;
 
 public abstract class AbstractTest {
 
