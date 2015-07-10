@@ -1,4 +1,4 @@
-package com.hawk.c01.custom.interview.itfc;
+package com.hawk.c01.custom.interview.interface_class;
 
 public interface IPerson {
 	//default is public static final

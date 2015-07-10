@@ -1,4 +1,4 @@
-package com.hawk.c01.custom.interview.abs;
+package com.hawk.c01.custom.interview.abstract_class;
 
 import java.io.IOException;
 
@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class BaseServlet extends HttpServlet{
+
+	public BaseServlet() {}
+	
+	public BaseServlet(String name) {
+		System.out.println(name);
+	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)

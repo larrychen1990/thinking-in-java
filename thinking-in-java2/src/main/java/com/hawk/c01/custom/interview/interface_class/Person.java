@@ -1,4 +1,4 @@
-package com.hawk.c01.custom.interview.itfc;
+package com.hawk.c01.custom.interview.interface_class;
 
 public class Person implements IPerson{
 	protected String nameString = "ddddd";
