@@ -21,6 +21,7 @@ public class RegularExpressionTester {
 		final JTextField patternField = new JTextField(12);
 
 		final JTextField testField = new JTextField(12);
+		final JTextField testField2 = new JTextField(12);
 
 		patternField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -48,6 +49,20 @@ public class RegularExpressionTester {
 				}
 			}
 		});
+		
+		testField2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				String pattern = patternField.getText();
+				String string = testField2.getText();
+				
+				// Check if input matches regex String
+				if (string.matches(pattern)) {
+					testField2.setBackground(Color.GREEN);
+				} else {
+					testField2.setBackground(Color.RED);
+				}
+			}
+		});
 
 		final JFrame frame = new JFrame("Regular Expression Tester");
 		frame.addWindowListener(new WindowAdapter() {
@@ -63,6 +78,8 @@ public class RegularExpressionTester {
 		contentPane.add(patternField);
 		contentPane.add(new JLabel("Test String "));
 		contentPane.add(testField);
+		contentPane.add(new JLabel("Test String 2"));
+		contentPane.add(testField2);
 		frame.pack();
 		frame.show();
 	}

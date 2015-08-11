@@ -35,6 +35,7 @@ class Producer extends Thread{
 		
 		String message = (String) messages.firstElement();
 		messages.removeElement(message);
+		
 		return message;
 	}
 
@@ -64,8 +65,14 @@ public class Consumer extends Thread {
 	
 	public static void main(String[] args) {
 		Producer producer = new Producer();
-        producer.start();
+		
+		synchronized (producer) {
+			producer.start();
+		}
+//			producer.start();
         new Consumer(producer).start();
+        
+        
 	}
 	
 }
