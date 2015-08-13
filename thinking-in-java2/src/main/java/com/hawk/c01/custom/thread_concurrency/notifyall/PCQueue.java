@@ -47,7 +47,7 @@ class Producer implements Runnable {
 				System.out.println("Produced by: " + Thread.currentThread().getName() + " Serial Number: "
 								+ refSerialNumber);
 
-				queue.notify();
+				queue.notifyAll();
 			}
 		}
 
@@ -78,7 +78,7 @@ class Consumer implements Runnable {
 				System.out.println("Consumed by: " + Thread.currentThread().getName() + " Serial Number: "
 								+ product.getSerialNumber());
 
-				queue.notify();
+				queue.notifyAll();
 
 			}
 		}
