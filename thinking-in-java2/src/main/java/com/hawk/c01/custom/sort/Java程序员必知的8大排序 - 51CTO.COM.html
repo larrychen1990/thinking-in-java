@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+
+<title>Java程序员必知的8大排序 - 51CTO.COM</title>
+<meta name="description" content="本文主要详解了Java语言的8大排序的基本思想以及实例解读，详细请看下文"/>
+<meta name="keywords" content="Java,程序员,排序"/>
+<base target="_blank" />
+<link href="http://images.51cto.com/images/art1105/css/grid.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="http://images.51cto.com/images/art/css/art_master_top.css" />
+<link href="http://book.51cto.com/images/bookspec/css/css3.css" rel="stylesheet" type="text/css" />
+<script language="javaScript" src="http://www.51cto.com/php/base_art.js"></SCRIPT>
+<script src="http://www.51cto.com/images/homepage/index_1_down.js"></script>
+<style type="text/css">
+.bds_tools a{ padding:0; margin:0;}
+</style>
+</head>
+<body >
+<!-- 导航 开始-->
+<script id="allmobilize" charset="utf-8" src="http://a.yunshipei.com/a3b9823c927173ada250e3f2f84f4703/allmobilize.min.js"></script><meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+<div id="home_top">    <div class="top_nav">        <div class="left" style="width:400px"><div class="logo_51cto" title="51CTO.COM - 技术成就梦想 -  中国领先的IT技术网站"></div><a href="http://www.51cto.com/">首页</a><img width="16" height="25" align="absmiddle" src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif" style="padding-top: 2px;"><a onmouseover="show(1,this);" onmouseout="popupClose();" href="http://www.51cto.com/col/35/" target="_blank">技术频道<img align="absmiddle" src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" style="padding-left: 4px;"></a><img width="16" height="25" align="absmiddle" src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif"><a onmouseover="show(2,this);" onmouseout="popupClose();" href="http://www.51cto.com" target="_blank">51CTO旗下网站<img align="absmiddle" src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" style="padding-left: 4px;"></a><img width="16" height="25" align="absmiddle" src="http://home.51cto.com/public/themes/blue/images/top_bg_xian.gif"><a href="http://www.51cto.com/about/map.htm" target="_blank">地图</a> <a href="http://www.51cto.com/about/rss.html" target="_blank"><img src="http://images.51cto.com/files/uploadimg/20110922/143749870.gif" style="vertical-align:middle; margin-bottom: 5px; margin-left:5px;"></a>       </div>        <div class="right">            <div class="more"><a href="http://shop.51cto.com" target="_blank">云特卖</a> <img width="27" height="16" align="absmiddle" src="http://home.51cto.com/public/themes/blue/images/top_shequ.gif">社区：<a href="http://edu.51cto.com/" target="_blank" style="color:#CC0000">学院</a><a href="http://down.51cto.com" target="_blank">下载</a><a href="http://bbs.51cto.com" target="_blank">论坛</a><a href="http://blog.51cto.com" target="_blank">博客</a><a onmouseover="show(3,this)" onmouseout="popupClose()" href="javascript:viod(0);">更多<img align="absmiddle" src="http://images.51cto.com/images/art/top_images/nav_ico1.gif" style="padding-left: 4px;"></a>            </div>            <span id="login_status"><div class="login" id="login_status"></div>    </span>                </div>    </div></div>
+<div class="subMenu1" id="s1" onmouseover="popupNoClose();" onmouseout="popupClose();">
+<ul>
+<li><a href="http://network.51cto.com" target="_blank">网络</a></li>
+<li><a href="http://netsecurity.51cto.com" target="_blank">安全</a></li>
+<li><a href="http://developer.51cto.com" target="_blank">开发</a></li>
+<li><a href="http://database.51cto.com" target="_blank">数据库</a></li>
+<li><a href="http://server.51cto.com" target="_blank">服务器</a></li>
+<li><a href="http://os.51cto.com" target="_blank">系统</a></li>
+<li><a href="http://virtual.51cto.com" target="_blank">虚拟化</a></li>
+<li><a href="http://cloud.51cto.com" target="_blank">云计算</a></li>
+<li><a href="http://developer.51cto.com/embed/" target="_blank">嵌入式</a></li>
+<li><a href="http://mobile.51cto.com/" target="_blank">移动开发</a></li>
+</ul>
+</div> 
+<div class="subMenu2" id="s2" onmouseover="popupNoClose()" onmouseout="popupClose()">
+<ul>
+<li><a href="http://www.51cto.com" target="_blank" title="中国领先的IT技术网站">51CTO.COM</a></li>
+<li><a href="http://www.cioage.com" target="_blank" title="中国首个专门服务于CIO的专业网站">CIOage.com</a></li>
+<li><a href="http://www.watchstor.com/" target="_blank"  title="领先的中文存储网络媒体">WatchStor.com</a></li>
+<li><a href="http://www.hc3i.cn/" target="_blank"  title="中国首家专注于数字医疗及医疗信息化的专业网站">HC3i.cn</a></li>
+</ul>
+</div>
+<script src="http://www.51cto.com/js/jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+	$(".bann").height(265);	 
+	$(".bann").css("background-color","white");
+	$(".hot").css("top","450px");
+	//$(".fixfloat").css("height","640px");
+	$(".g_13").find(".focus").css("height","640px");
+});
+var edunum=2;
+$(function(){
+	$("#change").click(function(){
+		$("#edu > ul").css("display","none");
+		var eduid='edu'+edunum;
+		$("#" + eduid).css("display","block");	
+		if(edunum<4){
+			edunum++;	
+		}else{
+			edunum=1;	
+		}							
+	});  
+});
+</script>
+
+<script src="http://www.51cto.com/head_art_more1.js"></script>
+<!-- 登陆信息 -->
+<!-- 导航 结束--> 
+ <div class="g_39 mb10">
+	<div id="tonglanad" class="fl"></div>
+	<div id="list4" class="fr">
+		<ul>
+			<li id="wordlinkad1"></li>
+			<li id="wordlinkad2"></li>
+			<li id="wordlinkad3"></li>
+			<li id="wordlinkad4"></li>
+		</ul>
+	</div>
+<br class="dle"/>
+</div>
+
+<div class="g_39 menu">
+<DIV class=subNav_logo><IMG src="http://www.51cto.com/images/sunbanner/kaifa_logo.gif"></DIV>
+<DIV class=subNav_l><A href="http://developer.51cto.com/">首页</A> | <A href="http://developer.51cto.com/java/">Java</A> | <A href="http://developer.51cto.com/net/">.NET</A> | <A href="http://developer.51cto.com/web/">Web</A> | <A href="http://developer.51cto.com/col/1315/">XML</A> | <A href="http://developer.51cto.com/col/585/">语言工具</A> | <A href="http://developer.51cto.com/col/1312/">测试</A> | <A href="http://developer.51cto.com/col/1314/" target=_blank>游戏</A> | <A href="http://developer.51cto.com/col/583/" target=_blank>移动</A> | <A href="http://developer.51cto.com/col/1308/">架构</A> | <A href="http://developer.51cto.com/col/586/">项目管理</A> | <A href="http://publish.51cto.com/list/460/">全部文章</A></DIV>
+  
+<div class="search fr">
+<dl>
+<form name=searchform action="http://www.51cto.com/php/search.php" target="_blank" method=post style="margin:0px; padding:0px;">
+<dt class="fl"><input name="keyword" type="text" class="searchInput f14 input" value="请输入关键字" onfocus="doempty(this, '请输入关键字');" onblur="doempty(this, '请输入关键字');" /></dt>
+<dd class="fl"><input type="image" src="http://images.51cto.com/images/art/newart1012/images/search.gif" /></dd></form>
+</dl>
+</div>
+<br class="dle"/>
+</div>
+<div class="g_39 b3-s-4273B3 rel">
+<!--width : 26*25 - 15 = 635px-->
+<div class="g_26 fl m_l">
+<div class="brief bgF8F8F8">
+<p class="crumb ">您所在的位置：<a href='http://developer.51cto.com'>开发</a> &gt; <a href='http://developer.51cto.com/java/'>Java</a> &gt; <a href='http://developer.51cto.com/col/1013/'>Java+</a> &gt;  <b>Java程序员必知的8大排序</b> </p>
+<h1>Java程序员必知的8大排序</h1>
+<div class="msg">
+<div>2012-06-28 14:01  without0815  博客园 <span class="f12-a"><a href="#commment" target="_self"></a></span> 字号：<span class="f14-b"><a href="javascript:setfont(12);" target="_self">T</a></span> | <span class="f16-b"><a href="javascript:setfont(16);" target="_self">T</a></span></div>
+<div class='artHd' id='books' style='padding:5px 25px;display:none;'></div>
+<div class="fav"><a href="javascript:favorBox('open');" title="一键收藏，随时查看，分享好友！" target="_self"><img src="http://images.51cto.com/images/art/newart1012/images/Fav.gif" alt="一键收藏，随时查看，分享好友！" border="0" /></a></div>
+</div>
+<div class="brieftext">
+<p class="f14 green">本文主要详解了Java语言的8大排序的基本思想以及实例解读，详细请看下文</p>
+<p class="ad">AD：<script src="http://www.51cto.com/js/article/keywords_ad_new.js"></script>
+</p>
+</div>
+</div>
+<div class="tag bgF8F8F8" id="indexlist" style="display:none;">
+<ul id="indexliststr">
+</ul>
+<br class="dle"/>
+</div>
+<div class="content bgF8F8F8 f14">
+<div id="content">
+<p><p>8种排序之间的关系:</p>
+<p style="text-align: center"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409190.png" /><br />
+&nbsp;</p>
+<p></p>
+<p><strong>1，&nbsp;直接插入排序</strong></p>
+<p>（1）基本思想：在要排序的一组数中，假设前面(n-1)[n&gt;=2] 个数已经是排</p>
+<p>好顺序的，现在要把第n个数插到前面的有序数中，使得这n个数</p>
+<p>也是排好顺序的。如此反复循环，直到全部排好顺序。</p>
+<p>（2）实例</p>
+<p style="text-align: center"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409191.png" /></p>
+<p>（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span>&nbsp;</span><span class="keyword">package</span><span>&nbsp;com.njue; &nbsp;</span></span></li><li><span>&nbsp; &nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;insertSort&nbsp;{ &nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;insertSort(){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;inta[]={</span><span class="number">49</span><span>,</span><span class="number">38</span><span>,</span><span class="number">65</span><span>,</span><span class="number">97</span><span>,</span><span class="number">76</span><span>,</span><span class="number">13</span><span>,</span><span class="number">27</span><span>,</span><span class="number">49</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">64</span><span>,</span><span class="number">5</span><span>,</span><span class="number">4</span><span>,</span><span class="number">62</span><span>,</span><span class="number">99</span><span>,</span><span class="number">98</span><span>,</span><span class="number">54</span><span>,</span><span class="number">56</span><span>,</span><span class="number">17</span><span>,</span><span class="number">18</span><span>,</span><span class="number">23</span><span>,</span><span class="number">34</span><span>,</span><span class="number">15</span><span>,</span><span class="number">35</span><span>,</span><span class="number">25</span><span>,</span><span class="number">53</span><span>,</span><span class="number">51</span><span>}; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;temp=</span><span class="number">0</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">1</span><span>;i&lt;a.length;i++){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;j=i-</span><span class="number">1</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp=a[i]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(;j&gt;=</span><span class="number">0</span><span>&amp;&amp;temp&lt;a[j];j--){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j+</span><span class="number">1</span><span>]=a[j];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//将大于temp的值整体后移一个单位 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j+</span><span class="number">1</span><span>]=temp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]); &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span>}&nbsp;</span></li></ol></pre>
+<p><strong>2，希尔排序（最小增量排序）</strong></p>
+<p></p>
+<p style="background-color: white">（1）基本思想：算法先将要排序的一组数按某个增量d（n/2,n为要排序数的个数）分成若干组，每组中记录的下标相差d.对每组中全部元素进行直接插入排序，然后再用一个较小的增量（d/2）对它进行分组，在每组中再进行直接插入排序。当增量减到1时，进行直接插入排序后，排序完成。</p>
+<p style="background-color: white">（2）实例：<br />
+&nbsp;</p>
+<p style="text-align: center"><strong><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409192.png" width="557" height="267" /><br />
+</strong></p>
+<p></p>
+<p></p>
+<p style="font-weight: bold">（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;shellSort&nbsp;{ &nbsp;</span></span></li><li><span class="keyword">public</span><span>&nbsp;&nbsp;shellSort(){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">1</span><span>,</span><span class="number">54</span><span>,</span><span class="number">6</span><span>,</span><span class="number">3</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">45</span><span>,</span><span class="number">56</span><span>,</span><span class="number">100</span><span>}; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">double</span><span>&nbsp;d1=a.length; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;temp=</span><span class="number">0</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(</span><span class="keyword">true</span><span>){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d1=&nbsp;Math.ceil(d1/</span><span class="number">2</span><span>); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;d=(</span><span class="keyword">int</span><span>)&nbsp;d1; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;x=</span><span class="number">0</span><span>;x&lt;d;x++){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=x+d;i&lt;a.length;i+=d){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;j=i-d; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp=a[i]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(;j&gt;=</span><span class="number">0</span><span>&amp;&amp;temp&lt;a[j];j-=d){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j+d]=a[j]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j+d]=temp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(d==</span><span class="number">1</span><span>) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">break</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]); &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>}&nbsp;</span></li></ol></pre>
+<p style="font-weight: bold">3.简单选择排序</p>
+<p style="background-color: white">（1）基本思想：在要排序的一组数中，选出最小的一个数与第一个位置的数交换；</p>
+<p style="background-color: white">然后在剩下的数当中再找最小的与第二个位置的数交换，如此循环到倒数第二个数和最后一个数比较为止。</p>
+<p style="background-color: white">（2）实例：</p>
+<p style="text-align: center"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409193.png" width="547" height="210" /></p>
+<p></p>
+<p>（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;selectSort&nbsp;{ &nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span>&nbsp;selectSort(){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">1</span><span>,</span><span class="number">54</span><span>,</span><span class="number">6</span><span>,</span><span class="number">3</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">45</span><span>}; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;position=</span><span class="number">0</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;j=i+</span><span class="number">1</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position=i; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;temp=a[i]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(;j&lt;a.length;j++){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(a[j]&lt;temp){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp=a[j]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position=j; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[position]=a[i]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[i]=temp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>} &nbsp;</span></li></ol></pre>
+<p><strong>4，堆排序</strong></p>
+<p style="background-color: white" align="left">（1）基本思想：堆排序是一种树形选择排序，是对直接选择排序的有效改进。</p>
+<p style="background-color: white" align="left">堆的定义如下：具有n个元素的序列（h1,h2,...,hn),当且仅当满足（hi&gt;=h2i,hi&gt;=2i+1）或（hi&lt;=h2i,hi&lt;=2i+1） (i=1,2,...,n/2)时称之为堆。在这里只讨论满足前者条件的堆。由堆的定义可以看出，堆顶元素（即第一个元素）必为最大项（大顶堆）。完全二叉树可以很直观地表示堆的结构。堆顶为根，其它为左子树、右子树。初始时把要排序的数的序列看作是一棵顺序存储的二叉树，调整它们的存储序，使之成为一个堆，这时堆的根节点的数最大。然后将根节点与堆的最后一个节点交换。然后对前面(n-1)个数重新调整使之成为堆。依此类推，直到只有两个节点的堆，并对它们作交换，最后得到有n个节点的有序序列。从算法描述来看，堆排序需要两个过程，一是建立堆，二是堆顶与堆的最后一个元素交换位置。所以堆排序有两个函数组成。一是建堆的渗透函数，二是反复调用渗透函数实现排序的函数。</p>
+<p style="background-color: white" align="left">（2）实例：</p>
+<p style="background-color: white" align="left">初始序列：46,79,56,38,40,84</p>
+<p style="background-color: white" align="left">建堆：</p>
+<p style="text-align: center"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409194.png" width="337" height="223" /><br />
+&nbsp;</p>
+<p></p>
+<p style="background-color: white">&nbsp;</p>
+<p style="background-color: white" align="left">交换，从堆中踢出最大数</p>
+<p style="text-align: center; background-color: white"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409195.png" width="440" height="296" /><br />
+&nbsp;</p>
+<p style="text-align: center; background-color: white"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409196.png" width="378" height="265" /><br />
+&nbsp;</p>
+<p style="background-color: white" align="left">&nbsp;</p>
+<p style="background-color: white" align="left">依次类推：最后堆中剩余的最后两个结点交换，踢出一个，排序完成。</p>
+<p style="background-color: white" align="left">（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">import</span><span>&nbsp;java.util.Arrays; &nbsp;</span></span></li><li><span>&nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;HeapSort&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">49</span><span>,</span><span class="number">38</span><span>,</span><span class="number">65</span><span>,</span><span class="number">97</span><span>,</span><span class="number">76</span><span>,</span><span class="number">13</span><span>,</span><span class="number">27</span><span>,</span><span class="number">49</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">64</span><span>,</span><span class="number">5</span><span>,</span><span class="number">4</span><span>,</span><span class="number">62</span><span>,</span><span class="number">99</span><span>,</span><span class="number">98</span><span>,</span><span class="number">54</span><span>,</span><span class="number">56</span><span>,</span><span class="number">17</span><span>,</span><span class="number">18</span><span>,</span><span class="number">23</span><span>,</span><span class="number">34</span><span>,</span><span class="number">15</span><span>,</span><span class="number">35</span><span>,</span><span class="number">25</span><span>,</span><span class="number">53</span><span>,</span><span class="number">51</span><span>}; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span>&nbsp;&nbsp;HeapSort(){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heapSort(a); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span>&nbsp;&nbsp;</span><span class="keyword">void</span><span>&nbsp;heapSort(</span><span class="keyword">int</span><span>[]&nbsp;a){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(</span><span class="string">&quot;开始排序&quot;</span><span>); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;arrayLength=a.length; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//循环建堆 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;arrayLength-</span><span class="number">1</span><span>;i++){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//建堆 </span><span>&nbsp;</span></li><li><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buildMaxHeap(a,arrayLength-</span><span class="number">1</span><span>-i); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//交换堆顶和最后一个元素 </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(a,</span><span class="number">0</span><span>,arrayLength-</span><span class="number">1</span><span>-i); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(Arrays.toString(a)); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">private</span><span>&nbsp;&nbsp;</span><span class="keyword">void</span><span>&nbsp;swap(</span><span class="keyword">int</span><span>[]&nbsp;data,&nbsp;</span><span class="keyword">int</span><span>&nbsp;i,&nbsp;</span><span class="keyword">int</span><span>&nbsp;j)&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;tmp=data[i]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[i]=data[j]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[j]=tmp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//对data数组从0到lastIndex建大顶堆 </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">private</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;buildMaxHeap(</span><span class="keyword">int</span><span>[]&nbsp;data,&nbsp;</span><span class="keyword">int</span><span>&nbsp;lastIndex)&nbsp;{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//从lastIndex处节点（最后一个节点）的父节点开始 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=(lastIndex-</span><span class="number">1</span><span>)/</span><span class="number">2</span><span>;i&gt;=</span><span class="number">0</span><span>;i--){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//k保存正在判断的节点 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;k=i; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//如果当前k节点的子节点存在 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(k*</span><span class="number">2</span><span>+</span><span class="number">1</span><span>&lt;=lastIndex){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//k节点的左子节点的索引 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;biggerIndex=</span><span class="number">2</span><span>*k+</span><span class="number">1</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//如果biggerIndex小于lastIndex，即biggerIndex+1代表的k节点的右子节点存在 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(biggerIndex&lt;lastIndex){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//若果右子节点的值较大 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(data[biggerIndex]&lt;data[biggerIndex+</span><span class="number">1</span><span>]){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//biggerIndex总是记录较大子节点的索引 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;biggerIndex++; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//如果k节点的值小于其较大的子节点的值 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(data[k]&lt;data[biggerIndex]){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//交换他们 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(data,k,biggerIndex); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//将biggerIndex赋予k，开始while循环的下一次循环，重新保证k节点的值大于其左右子节点的值 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k=biggerIndex; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span><span class="keyword">else</span><span>{ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">break</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&lt;p&nbsp;align=</span><span class="string">&quot;left&quot;</span><span>&gt;&amp;nbsp;&lt;span&gt;&nbsp;&nbsp;&nbsp;&lt;/span&gt;}&lt;/p&gt;&lt;p&nbsp;align=</span><span class="string">&quot;left&quot;</span><span>&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&nbsp;}&lt;/p&gt;&lt;p&nbsp;align=</span><span class="string">&quot;left&quot;</span><span>&gt;&amp;nbsp;&lt;span&nbsp;style=</span><span class="string">&quot;background-color:&nbsp;white;&nbsp;&quot;</span><span>&gt;}&lt;/span&gt;&lt;/p&gt; &nbsp;</span></li></ol></pre>
+<p><strong>5.冒泡排序</strong></p>
+<p style="background-color: white" align="left">（1）基本思想：在要排序的一组数中，对当前还未排好序的范围内的全部数，自上而下对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。</p>
+<p style="background-color: white" align="left">（2）实例：</p>
+<p style="text-align: center"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409197.png" width="455" height="238" /><br />
+&nbsp;</p>
+<p></p>
+<p style="background-color: white">&nbsp;</p>
+<p style="background-color: white" align="left">（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;bubbleSort&nbsp;{ &nbsp;</span></span></li><li><span class="keyword">public</span><span>&nbsp;&nbsp;bubbleSort(){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">49</span><span>,</span><span class="number">38</span><span>,</span><span class="number">65</span><span>,</span><span class="number">97</span><span>,</span><span class="number">76</span><span>,</span><span class="number">13</span><span>,</span><span class="number">27</span><span>,</span><span class="number">49</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">64</span><span>,</span><span class="number">5</span><span>,</span><span class="number">4</span><span>,</span><span class="number">62</span><span>,</span><span class="number">99</span><span>,</span><span class="number">98</span><span>,</span><span class="number">54</span><span>,</span><span class="number">56</span><span>,</span><span class="number">17</span><span>,</span><span class="number">18</span><span>,</span><span class="number">23</span><span>,</span><span class="number">34</span><span>,</span><span class="number">15</span><span>,</span><span class="number">35</span><span>,</span><span class="number">25</span><span>,</span><span class="number">53</span><span>,</span><span class="number">51</span><span>}; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;temp=</span><span class="number">0</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length-</span><span class="number">1</span><span>;i++){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;j=</span><span class="number">0</span><span>;j&lt;a.length-</span><span class="number">1</span><span>-i;j++){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(a[j]&gt;a[j+</span><span class="number">1</span><span>]){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp=a[j]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j]=a[j+</span><span class="number">1</span><span>]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j+</span><span class="number">1</span><span>]=temp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]);&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span>&nbsp;</span></li></ol></pre>
+<p style="background-color: white" align="left"><strong>6.快速排序</strong></p>
+<p style="background-color: white" align="left">&nbsp;</p>
+<p style="background-color: white">（1）基本思想：选择一个基准元素,通常选择第一个元素或者最后一个元素,通过一趟扫描，将待排序列分成两部分,一部分比基准元素小,一部分大于等于基准元素,此时基准元素在其排好序后的正确位置,然后再用同样的方法递归地排序划分的两部分。</p>
+<p style="background-color: white">（2）实例：</p>
+<p style="text-align: center; background-color: white"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409198.png" width="305" height="401" /><br />
+&nbsp;</p>
+<p style="background-color: white">&nbsp;</p>
+<p>（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;quickSort&nbsp;{ &nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">49</span><span>,</span><span class="number">38</span><span>,</span><span class="number">65</span><span>,</span><span class="number">97</span><span>,</span><span class="number">76</span><span>,</span><span class="number">13</span><span>,</span><span class="number">27</span><span>,</span><span class="number">49</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">64</span><span>,</span><span class="number">5</span><span>,</span><span class="number">4</span><span>,</span><span class="number">62</span><span>,</span><span class="number">99</span><span>,</span><span class="number">98</span><span>,</span><span class="number">54</span><span>,</span><span class="number">56</span><span>,</span><span class="number">17</span><span>,</span><span class="number">18</span><span>,</span><span class="number">23</span><span>,</span><span class="number">34</span><span>,</span><span class="number">15</span><span>,</span><span class="number">35</span><span>,</span><span class="number">25</span><span>,</span><span class="number">53</span><span>,</span><span class="number">51</span><span>}; &nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;&nbsp;quickSort(){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;quick(a); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]); &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">int</span><span>&nbsp;getMiddle(</span><span class="keyword">int</span><span>[]&nbsp;list,&nbsp;</span><span class="keyword">int</span><span>&nbsp;low,&nbsp;</span><span class="keyword">int</span><span>&nbsp;high)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;tmp&nbsp;=&nbsp;list[low];&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//数组的第一个作为中轴&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>&nbsp;(low&nbsp;&lt;&nbsp;high)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>&nbsp;(low&nbsp;&lt;&nbsp;high&nbsp;&amp;&amp;&nbsp;list[high]&nbsp;&gt;=&nbsp;tmp)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;high--;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list[low]&nbsp;=&nbsp;list[high];&nbsp;&nbsp;&nbsp;</span><span class="comment">//比中轴小的记录移到低端&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>&nbsp;(low&nbsp;&lt;&nbsp;high&nbsp;&amp;&amp;&nbsp;list[low]&nbsp;&lt;=&nbsp;tmp)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;low++;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list[high]&nbsp;=&nbsp;list[low];&nbsp;&nbsp;&nbsp;</span><span class="comment">//比中轴大的记录移到高端&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list[low]&nbsp;=&nbsp;tmp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//中轴记录到尾&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">return</span><span>&nbsp;low;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//返回中轴的位置&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp; &nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;_quickSort(</span><span class="keyword">int</span><span>[]&nbsp;list,&nbsp;</span><span class="keyword">int</span><span>&nbsp;low,&nbsp;</span><span class="keyword">int</span><span>&nbsp;high)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>&nbsp;(low&nbsp;&lt;&nbsp;high)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;middle&nbsp;=&nbsp;getMiddle(list,&nbsp;low,&nbsp;high);&nbsp;&nbsp;</span><span class="comment">//将list数组进行一分为二&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_quickSort(list,&nbsp;low,&nbsp;middle&nbsp;-&nbsp;</span><span class="number">1</span><span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//对低字表进行递归排序&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_quickSort(list,&nbsp;middle&nbsp;+&nbsp;</span><span class="number">1</span><span>,&nbsp;high);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//对高字表进行递归排序&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;quick(</span><span class="keyword">int</span><span>[]&nbsp;a2)&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>&nbsp;(a2.length&nbsp;&gt;&nbsp;</span><span class="number">0</span><span>)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//查看数组是否为空&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_quickSort(a2,&nbsp;</span><span class="number">0</span><span>,&nbsp;a2.length&nbsp;-&nbsp;</span><span class="number">1</span><span>);&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;</span></li><li><span>} &nbsp;</span></li></ol></pre>
+<p style="background-color: white; font-weight: bold" align="left">7、归并排序</p>
+<p style="background-color: white" align="left">（1）基本排序：归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。</p>
+<p style="background-color: white" align="left">（2）实例：</p>
+<p style="text-align: center"><strong><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/1409199.png" width="402" height="202" /></strong></p>
+<p></p>
+<p style="background-color: white" align="left">&nbsp;</p>
+<p style="background-color: white" align="left"><strong>（3）用java实现</strong></p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">import</span><span>&nbsp;java.util.Arrays; &nbsp;</span></span></li><li><span>&nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;mergingSort&nbsp;{ &nbsp;</span></li><li><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">49</span><span>,</span><span class="number">38</span><span>,</span><span class="number">65</span><span>,</span><span class="number">97</span><span>,</span><span class="number">76</span><span>,</span><span class="number">13</span><span>,</span><span class="number">27</span><span>,</span><span class="number">49</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">64</span><span>,</span><span class="number">5</span><span>,</span><span class="number">4</span><span>,</span><span class="number">62</span><span>,</span><span class="number">99</span><span>,</span><span class="number">98</span><span>,</span><span class="number">54</span><span>,</span><span class="number">56</span><span>,</span><span class="number">17</span><span>,</span><span class="number">18</span><span>,</span><span class="number">23</span><span>,</span><span class="number">34</span><span>,</span><span class="number">15</span><span>,</span><span class="number">35</span><span>,</span><span class="number">25</span><span>,</span><span class="number">53</span><span>,</span><span class="number">51</span><span>}; &nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;&nbsp;mergingSort(){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;sort(a,</span><span class="number">0</span><span>,a.length-</span><span class="number">1</span><span>); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]); &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;sort(</span><span class="keyword">int</span><span>[]&nbsp;data,&nbsp;</span><span class="keyword">int</span><span>&nbsp;left,&nbsp;</span><span class="keyword">int</span><span>&nbsp;right)&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(left&lt;right){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//找出中间索引 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;center=(left+right)/</span><span class="number">2</span><span>; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//对左边数组进行递归 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort(data,left,center); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//对右边数组进行递归 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort(data,center+</span><span class="number">1</span><span>,right); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//合并 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;merge(data,left,center,right); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>} &nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;merge(</span><span class="keyword">int</span><span>[]&nbsp;data,&nbsp;</span><span class="keyword">int</span><span>&nbsp;left,&nbsp;</span><span class="keyword">int</span><span>&nbsp;center,&nbsp;</span><span class="keyword">int</span><span>&nbsp;right)&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;[]&nbsp;tmpArr=</span><span class="keyword">new</span><span>&nbsp;</span><span class="keyword">int</span><span>[data.length]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;mid=center+</span><span class="number">1</span><span>; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//third记录中间数组的索引 </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;third=left; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;tmp=left; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(left&lt;=center&amp;&amp;mid&lt;=right){ &nbsp;</span></li><li><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;</span><span class="comment">//从两个数组中取出最小的放入中间数组 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(data[left]&lt;=data[mid]){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmpArr[third++]=data[left++]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span><span class="keyword">else</span><span>{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmpArr[third++]=data[mid++]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//剩余部分依次放入中间数组 </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(mid&lt;=right){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmpArr[third++]=data[mid++]; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(left&lt;=center){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmpArr[third++]=data[left++]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//将中间数组中的内容复制回原数组 </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(tmp&lt;=right){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[tmp]=tmpArr[tmp++]; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(Arrays.toString(data)); &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span>&nbsp;</span></li><li><span>} &nbsp;</span></li></ol></pre>
+<p style="background-color: white" align="left"><strong>8、基数排序</strong></p>
+<p style="background-color: white" align="left">（1）基本思想：将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后,数列就变成一个有序序列。</p>
+<p style="background-color: white" align="left">（2）实例：</p>
+<p style="text-align: center"><img  class='fit-image' onload='javascript:if(this.width>498)this.width=498;' onmousewheel = 'javascript:return big(this)' alt="" src="http://images.51cto.com/files/uploadimg/20120628/14091910.png" width="630" height="482" /></p>
+<p></p>
+<p style="background-color: white">&nbsp;</p>
+<p>（3）用java实现</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">import</span><span>&nbsp;java.util.ArrayList; &nbsp;</span></span></li><li><span class="keyword">import</span><span>&nbsp;java.util.List; &nbsp;</span></li><li class="alt"><span>&nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;radixSort&nbsp;{ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;a[]={</span><span class="number">49</span><span>,</span><span class="number">38</span><span>,</span><span class="number">65</span><span>,</span><span class="number">97</span><span>,</span><span class="number">76</span><span>,</span><span class="number">13</span><span>,</span><span class="number">27</span><span>,</span><span class="number">49</span><span>,</span><span class="number">78</span><span>,</span><span class="number">34</span><span>,</span><span class="number">12</span><span>,</span><span class="number">64</span><span>,</span><span class="number">5</span><span>,</span><span class="number">4</span><span>,</span><span class="number">62</span><span>,</span><span class="number">99</span><span>,</span><span class="number">98</span><span>,</span><span class="number">54</span><span>,</span><span class="number">101</span><span>,</span><span class="number">56</span><span>,</span><span class="number">17</span><span>,</span><span class="number">18</span><span>,</span><span class="number">23</span><span>,</span><span class="number">34</span><span>,</span><span class="number">15</span><span>,</span><span class="number">35</span><span>,</span><span class="number">25</span><span>,</span><span class="number">53</span><span>,</span><span class="number">51</span><span>}; &nbsp;</span></li><li><span class="keyword">public</span><span>&nbsp;radixSort(){ &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sort(a); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;a.length;i++) &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(a[i]); &nbsp;</span></li><li><span>} &nbsp;</span></li><li class="alt"><span class="keyword">public</span><span>&nbsp;&nbsp;</span><span class="keyword">void</span><span>&nbsp;sort(</span><span class="keyword">int</span><span>[]&nbsp;array){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//首先确定排序的趟数;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;max=array[</span><span class="number">0</span><span>];&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">1</span><span>;i&lt;array.length;i++){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(array[i]&gt;max){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max=array[i];&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;time=</span><span class="number">0</span><span>;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//判断位数;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(max&gt;</span><span class="number">0</span><span>){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max/=</span><span class="number">10</span><span>;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time++;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//建立10个队列;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;ArrayList&gt;&nbsp;queue=</span><span class="keyword">new</span><span>&nbsp;ArrayList&lt;ArrayList&gt;();&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;</span><span class="number">10</span><span>;i++){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&lt;Integer&gt;&nbsp;queue1=</span><span class="keyword">new</span><span>&nbsp;ArrayList&lt;Integer&gt;();&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue.add(queue1);&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//进行time次分配和收集;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;i=</span><span class="number">0</span><span>;i&lt;time;i++){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//分配数组元素;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;j=</span><span class="number">0</span><span>;j&lt;array.length;j++){&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//得到数字的第time+1位数;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;x=array[j]%(</span><span class="keyword">int</span><span>)Math.pow(</span><span class="number">10</span><span>,&nbsp;i+</span><span class="number">1</span><span>)/(</span><span class="keyword">int</span><span>)Math.pow(</span><span class="number">10</span><span>,&nbsp;i); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&lt;Integer&gt;&nbsp;queue2=queue.get(x); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue2.add(array[j]); &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue.set(x,&nbsp;queue2); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;count=</span><span class="number">0</span><span>;</span><span class="comment">//元素计数器;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//收集队列元素;&nbsp;&nbsp;&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(</span><span class="keyword">int</span><span>&nbsp;k=</span><span class="number">0</span><span>;k&lt;</span><span class="number">10</span><span>;k++){&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">while</span><span>(queue.get(k).size()&gt;</span><span class="number">0</span><span>){ &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&lt;Integer&gt;&nbsp;queue3=queue.get(k); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array[count]=queue3.get(</span><span class="number">0</span><span>);&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue3.remove(</span><span class="number">0</span><span>); &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count++; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;</span></li><li><span>} &nbsp;</span></li></ol></pre>
+<p>原文链接：<a href="http://blog.csdn.net/without0815/article/details/7697916">http://blog.csdn.net/without0815/article/details/7697916</a></p><p>【编辑推荐】</p><div><ol><li><a href=http://developer.51cto.com/art/201206/344308.htm target='_blank'>Java 8的Lambda表达式</a></li><li><a href=http://developer.51cto.com/art/201206/344566.htm target='_blank'>程序员不是一般的人</a></li><li><a href=http://developer.51cto.com/art/201206/344576.htm target='_blank'>使用 JavaScript 遍历文档对象模型</a></li><li><a href=http://developer.51cto.com/art/201206/344579.htm target='_blank'>Java测试Systems Director的REST API</a></li><li><a href=http://developer.51cto.com/art/201206/344788.htm target='_blank'>Java实现的几个常用排序算法详细解读</a></li></ol></div><DIV align=right>【责任编辑：<A class=ln href="mailto:linss@51cto.com">小林</A> TEL：（010）68476606】</DIV><br> 
+<p class="blank10"></p> 
+ 
+ 
+
+
+<div class="f12"> <span class="fl">原文：<a href="http://developer.51cto.com/art/201206/345156.htm" class="blue"><b>Java程序员必知的8大排序</b></a></span> <span class="fr"><a href="http://developer.51cto.com">返回开发首页</a></span> </div>
+<p class="blank1"></p>
+</div>
+<hr style="border-top: #555555 1px solid; height: 1px; border-right: medium none; border-bottom: medium none; border-left: medium none" />
+<div style="width: 600px; background: #ffffff"><img width="350" height="140" border="0" alt="" src="http://s8.51cto.com/wyfs02/M02/71/11/wKioL1XEfU6zvaQOAAEVZjYGFoI181.jpg" /></div>
+<hr style="border-top: #555555 1px solid; height: 1px; border-right: medium none; border-bottom: medium none; border-left: medium none" />
+<iframe width="600" height="239" frameborder="0" src="http://widget.weibo.com/relationship/bulkfollow.php?language=zh_cn&amp;uids=1708729084,1706976420,3812432787,1422974343,1927494533,1734475394&amp;wide=0&amp;color=C2D9F2,FFFFFF,0082CB,666666&amp;showtitle=1&amp;showinfo=1&amp;sense=0&amp;verified=1&amp;count=6&amp;refer='+encodeURIComponent(location.href)+'&amp;dpc=1" scrolling="no"></iframe>
+<div class="tips">
+<div style="float:left;">
+<span style="float:left; margin-top:4px;">分享到：</span>
+<!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="margin-right:5px; float:left;">
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <span class="bds_more"></span>
+		<a class="shareCount"></a>
+
+</div>
+<!--<div class="fl"> 
+    </div>
+--><script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=585532" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	var bds_config = {'snsKey':{'tsina':'2378297317'}};
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+
+
+
+</div><div class="fr blue"><a href="javascript:AddFavorite(document.location.href,document.title);" target="_self">收藏</a>|<a href="javascript:window.print();" target="_self">打印</a>|<a id="msnqqcopy" title="分享本资源给好友" target="_self">复制</a></div>
+</div>
+</div>
+<!--内容 end-->
+<div class="topbiaoqing">
+<div class="biaoqing fixfloat pad" >
+<ul>
+<li><a href='javascript:getcountscom(345156,1)' target="_self"><img src="http://images.51cto.com/images/art1105/images/bq1.jpg" /></a>
+<div><a href='javascript:getcountscom(345156,1)' target="_self">给力</a></div>
+<span id="345156_1">(0票)</span></li>
+<li><a href='javascript:getcountscom(345156,2)'  target="_self"><img src="http://images.51cto.com/images/art1105/images/bq2.jpg" /></a>
+<div><a href='javascript:getcountscom(345156,2)'  target="_self">动心</a></div>
+<span id="345156_2">(0票)</span></li>
+<li><a href='javascript:getcountscom(345156,3)'  target="_self"><img src="http://images.51cto.com/images/art1105/images/bq3.jpg" /></a>
+<div><a href='javascript:getcountscom(345156,3)'  target="_self">废话</a></div>
+<span id="345156_3">(0票)</span></li>
+<li><a href='javascript:getcountscom(345156,4)'  target="_self"><img src="http://images.51cto.com/images/art1105/images/bq4.jpg" /></a>
+<div><a href='javascript:getcountscom(345156,4)'  target="_self">专业</a></div>
+<span id="345156_4">(0票)</span></li>
+<li><a href='javascript:getcountscom(345156,5)'  target="_self"><img src="http://images.51cto.com/images/art1105/images/bq5.jpg" /></a>
+<div><a href='javascript:getcountscom(345156,5)'  target="_self">标题党</a></div>
+<span id="345156_5">(0票)</span></li>
+<li><a href='javascript:getcountscom(345156,6)'  target="_self"><img src="http://images.51cto.com/images/art1105/images/bq6.jpg" /></a>
+<div><a href='javascript:getcountscom(345156,6)'  target="_self">路过</a></div>
+<span id="345156_6">(0票)</span></li>
+</ul>
+</div>
+<script language="javascript"> 
+getcountscom(345156,11);
+
+</script>
+</div>
+<p class="blank10"></p>
+<!--reltag end-->
+
+<p class="blank10"></p>
+<div class="uyan">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1609262"></script>
+</div>
+<!--box end-->
+
+<div class="bor">
+<div class="titbg pl15">关于<a href='http://www.51cto.com/php/search.php?keyword=Java' target='_blank' class='underline'>Java</a>&nbsp;&nbsp;<a href='http://www.51cto.com/php/search.php?keyword=%B3%CC%D0%F2%D4%B1' target='_blank' class='underline'>程序员</a>&nbsp;&nbsp;<a href='http://www.51cto.com/php/search.php?keyword=%C5%C5%D0%F2' target='_blank' class='underline'>排序</a>的更多文章</div>
+<div class="reltag">
+<ul class="fl list02">
+  <li><a href="http://developer.51cto.com/art/201311/415539.htm" title="Facebook第一位女程序员的故事">Facebook第一位女程序员的故事</a></li><li><a href="http://developer.51cto.com/art/201311/415503.htm" title="信仰是如何毁掉程序员的">信仰是如何毁掉程序员的</a></li><li><a href="http://developer.51cto.com/art/201311/415250.htm" title="程序员最头疼的事：命名">程序员最头疼的事：命名</a></li><li><a href="http://developer.51cto.com/art/201311/415096.htm" title="Java 开源博客—B3log Solo 0.6.5 正式版发布了！">Java 开源博客—B3log Solo 0.6.5 正式版发</a></li><li><a href="http://developer.51cto.com/art/201311/415049.htm" title="没有好词典，别做程序员">没有好词典，别做程序员</a></li>
+</ul>
+<div class="fr">
+<div class="h5 f12"><a href="http://developer.51cto.com/art/201311/415182.htm" title="开发频道2013年10月第5周重点内容推荐：JavaScript就是一种垃圾语言"><b>开发频道2013年10月第5周重点内容推荐：JavaScript就是一种垃圾语言</b></a></div>
+<a href="http://developer.51cto.com/art/201311/415182.htm" title="开发频道2013年10月第5周重点内容推荐：JavaScript就是一种垃圾语言"><img src="http://s5.51cto.com/wyfs01/M00/31/AE/wKioJlJzSTTgD4rzAAATbDPO0Lg822.jpg" alt="开发频道2013年10月第5周重点内容推荐：JavaScript就是一种垃圾语言" width="100" height="80" border="0" /></a>
+<p class="c666">又是一周匆匆而过。上周五、周六两天，2013年51CTO云计算架构师<a class="blue"href="http://developer.51cto.com/art/201311/415182.htm" title="开发频道2013年10月第5周重点内容推荐：JavaScript就是一种垃圾语言">[详细]</a></p>
+</div>
+</div></div>
+
+<p class="blank10"></p>
+
+
+
+<div class="relart fl bor">
+<div class="titbg">
+<h3 class="fl t1">栏目热门</h3>
+<a href="/click/1013" class="tmore">更多&gt;&gt;</a></div>
+<ul>
+  
+	  <li><a href="http://developer.51cto.com/art/201309/411140.htm" title="用来理解 Java 编程语言的 8 个图表">用来理解 Java 编程语言的 8 个图表</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201309/411061.htm" title="揭开Socket编程的面纱">揭开Socket编程的面纱</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201309/410205.htm" title="浅谈Java中的Set、List、Map的区别">浅谈Java中的Set、List、Map的区别</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201309/411231.htm" title="图形加速可令Java提速10倍">图形加速可令Java提速10倍</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201310/412996.htm" title="JavaOne 2013：将REST与JSON相结合以创建API">JavaOne 2013：将REST与JSON相结合以创建AP</a></li>
+	  
+</ul>
+</div>
+<div class="cathot fr bor">
+<div class="titbg">
+<h3 class="fl t1">同期最新</h3>
+<a href="/col/1013" class="tmore">更多&gt;&gt;</a></div>
+<ul>
+	
+	  <li><a href="http://developer.51cto.com/art/201206/344308.htm" title="Java 8的Lambda表达式">Java 8的Lambda表达式</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201206/344107.htm" title="用Java实现的日志切割清理工具">用Java实现的日志切割清理工具</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201206/344027.htm" title="Java和.NET开发过程中的一些不同">Java和.NET开发过程中的一些不同</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201206/343854.htm" title="关于Lucene以及索引和搜索的流程">关于Lucene以及索引和搜索的流程</a></li>
+	  
+	  <li><a href="http://developer.51cto.com/art/201206/343690.htm" title="Java中用内存映射处理大文件">Java中用内存映射处理大文件</a></li>
+	  
+</ul>
+</div>
+<p class="blank10"></p>
+<div class="bor">
+<div class="titbg">
+<h3 class="fl t1"><a href="http://developer.51cto.com">开发</a></h3>
+<span class="pl10">频道导航</span></div>
+ <ul class="xtlist">
+<li><span class="tit">Java</span>
+<div><a href="http://developer.51cto.com/java/">Java开发</a>|<a href="http://developer.51cto.com/col/1005/">Java基础</a>|<a href="http://developer.51cto.com/col/1014/">Java EE开发</a>|<a href="http://developer.51cto.com/col/1004/">Java框架</a>|<a href="http://developer.51cto.com/col/1007/">设计模式</a></div>
+</li>
+<li><span class="tit">WEB开发</span>
+<div><a href="http://developer.51cto.com/col/1441/">PHP开发</a>|<a href="http://developer.51cto.com/col/1455/">Python</a>|<a href="http://developer.51cto.com/col/1552/">Ruby</a>|<a href="http://developer.51cto.com/col/1552/">JSP</a>|<a href="http://developer.51cto.com/art/200907/133407.htm">HTML 5</a>|<a href="http://developer.51cto.com/col/1450/">DIV+CSS</a></div>
+</li>
+<li class="last"><span class="tit">综合</span>
+<div><a href="http://developer.51cto.com/net/">.NET开发</a>|<a href="http://developer.51cto.com/embed/">嵌入式开发</a>|<a href="http://developer.51cto.com/col/586/">项目管理</a>|<a href="http://developer.51cto.com/col/1308/">架构设计</a></div>
+</li>
+</ul> 
+</div> 
+<p class="blank10"></p>
+<DIV class=leftbotcon>
+<DIV class="bor jdlist">
+<DIV class=titbg>
+<H3 class=t2>热点推荐</H3></DIV>
+<UL>
+<LI><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-t-4']);" href="http://mobile.51cto.com/mobile-182392.htm"><IMG src="http://images.51cto.com/files/uploadimg/20100202/153546162.jpg"></A> 
+<DIV class=name><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-t-4']);" href="http://mobile.51cto.com/mobile-182392.htm">Android开发应用详解</A></DIV></LI>
+<LI><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-t-4']);" href="http://developer.51cto.com/art/201106/266369.htm"><IMG src="http://images.51cto.com/files/uploadimg/20110608/133620622.jpg"></A> 
+<DIV class=name><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-t-4']);" href="http://developer.51cto.com/art/201106/266369.htm">那些性感的让人尖叫的程序员</A></DIV></LI>
+<LI><A href="http://developer.51cto.com/art/200907/133407.htm"><IMG src="http://images.51cto.com/files/uploadimg/20090702/134217922.jpg"></A> 
+<DIV class=name><A href="http://developer.51cto.com/art/200907/133407.htm">HTML5 下一代Web开发标准详解</A></DIV></LI>
+<LI><A href="http://developer.51cto.com/art/201104/257581.htm"><IMG src="http://images.51cto.com/files/uploadimg/20110426/123123954.jpg"></A> 
+<DIV class=name><A href="http://developer.51cto.com/art/201104/257581.htm">高性能WEB开发应用指南</A></DIV></LI>
+<LI><A href="http://os.51cto.com/art/200706/49181.htm"><IMG src="http://images.51cto.com/files/uploadimg/20070613/195816929.jpg"></A> 
+<DIV class=name><A href="http://os.51cto.com/art/200706/49181.htm">Ubuntu开源技术交流频道</A></DIV></LI></UL></DIV>
+<P class=blank10></P>
+<DIV class="bor hotTag"><STRONG>热门标签：</STRONG> <A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-2]);" href="http://os.51cto.com/windows/">windows频道</A><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-w']);" href="http://mobile.51cto.com/">移动开发</A><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-w']);" href="http://cloud.51cto.com/">云计算</A><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-w']);" href="http://mobile.51cto.com/mobile/objc/">objective-c</A><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-w']);" href="http://network.51cto.com/art/200909/151122.htm">tp-link路由器设置图解</A><A onclick="javascript: _gaq.push(['_trackPageview', '/51cto/neirong/d-w']);" href="http://developer.51cto.com/art/200907/133407.htm">html5</A> </DIV></DIV>
+<div class="leftbotbox"> </div>
+</div>
+<!--left end-->
+<div class="g_13 fr">
+<div class="focus fixfloat"> 
+ <img width="298" style="border: 1px solid #CCCCCC; margin:5px 0px 5px;" src="http://www.51cto.com/images/weixin.jpg"><div class="hot">
+<ul>
+<li class="tit"><em>专题</em> <a href="http://developer.51cto.com/art/201507/482762.htm">剥开大数据的层层面纱</a> </li>
+<li class="con"><dl><dt><a href="http://developer.51cto.com/art/201507/482762.htm"><img border="0" src="http://s1.51cto.com/wyfs02/M02/71/07/wKiom1XECu7gU6-DAAA9v6oWEFc145.jpg"/></a></dt>
+<dd>前几天和长辈闲聊之下，“大数据”，竟然也从老人家嘴里蹦出来。真是...</dd>
+</dl></li></ul><ol class="hotlist"><li><a href="http://developer.51cto.com/art/201506/479273.htm">编程开发界 老者经验荟萃</a></li><li><a href="http://developer.51cto.com/art/201505/475552.htm">关于JavaScript工具以及技巧</a></li></ol></div>
+<p id="hzh_one">
+<script language="JavaScript" src="http://www.51cto.com/ad/art/hzh/ad.js" type="text/javascript"></script>
+</p>
+</div>
+<div class="rank">
+<div class="tlt">
+      <h3>文章排行</h3>
+      <a onmouseover="change_top10(3);" id="top_3">本月</a><a onmouseover="change_top10(2);" id="top_2">本周</a><a onmouseover="change_top10(1);" class="myon" id="top_1">24小时</a> </div>
+ <div id="top10_1" style="display: block;" class="list"><ul>
+<li><a href="http://developer.51cto.com/art/201006/205212.htm" target="_blank" title="多图详解Spring框架的设计理念与设计模">多图详解Spring框架的设计理念与设计模</a>
+<li><a href="http://developer.51cto.com/art/201107/274075.htm" target="_blank" title="29个非常实用的HTML 5实例、教程和技巧">29个非常实用的HTML 5实例、教程和技巧</a>
+<li><a href="http://developer.51cto.com/art/201501/464543.htm" target="_blank" title="PHP对战Node.js：一场关于开发者喜好的">PHP对战Node.js：一场关于开发者喜好的</a>
+<li><a href="http://developer.51cto.com/art/200906/128274.htm" target="_blank" title="Java数组声明、创建、初始化">Java数组声明、创建、初始化</a>
+<li><a href="http://developer.51cto.com/art/200903/117512.htm" target="_blank" title="详解Java解析XML的四种方法">详解Java解析XML的四种方法</a>
+<li><a href="http://developer.51cto.com/art/201302/380661.htm" target="_blank" title="现在就开始使用AngularJS的三个重要原">现在就开始使用AngularJS的三个重要原</a>
+<li><a href="http://developer.51cto.com/art/201502/464853.htm" target="_blank" title="游戏中的“战争黑雾”和现实中的程序员">游戏中的“战争黑雾”和现实中的程序员</a>
+<li><a href="http://developer.51cto.com/art/200908/146071.htm" target="_blank" title="五个免费UML建模工具推荐">五个免费UML建模工具推荐</a>
+<li><a href="http://developer.51cto.com/art/201103/248670.htm" target="_blank" title="25个超棒的jQuery日历和日期选取插件">25个超棒的jQuery日历和日期选取插件</a>
+<li><a href="http://developer.51cto.com/art/201502/464832.htm" target="_blank" title="Visual C++ 2015引入更新的C++ 特性到W">Visual C++ 2015引入更新的C++ 特性到W</a>
+</ul></div>
+<div id="top10_2" style="display: none;" class="list"><ul>
+<li><a href="http://developer.51cto.com/art/201501/464543.htm" target="_blank" title="PHP对战Node.js：一场关于开发者喜好的">PHP对战Node.js：一场关于开发者喜好的</a>
+<li><a href="http://developer.51cto.com/art/201501/464238.htm" target="_blank" title="关于大型网站技术演进的思考：存储的瓶">关于大型网站技术演进的思考：存储的瓶</a>
+<li><a href="http://developer.51cto.com/art/201501/464538.htm" target="_blank" title="我辞去了工作 住在帐篷中写代码">我辞去了工作 住在帐篷中写代码</a>
+<li><a href="http://developer.51cto.com/art/201501/464391.htm" target="_blank" title="【博文推荐】来自某CTO的演讲：对码农">【博文推荐】来自某CTO的演讲：对码农</a>
+<li><a href="http://developer.51cto.com/art/201501/464539.htm" target="_blank" title="Java架构师与开发者提高效率的10个工具">Java架构师与开发者提高效率的10个工具</a>
+<li><a href="http://developer.51cto.com/art/201501/464382.htm" target="_blank" title="能让程序员心花怒放的七种礼物">能让程序员心花怒放的七种礼物</a>
+<li><a href="http://developer.51cto.com/art/201502/464640.htm" target="_blank" title="如何在发型不乱的前提下应对单日十亿计">如何在发型不乱的前提下应对单日十亿计</a>
+<li><a href="http://developer.51cto.com/art/201501/464537.htm" target="_blank" title="微信开放JS-SDK后 创业还需要开发App么">微信开放JS-SDK后 创业还需要开发App么</a>
+<li><a href="http://developer.51cto.com/art/201502/464638.htm" target="_blank" title="优秀网站看前端：小米Note介绍页面代码">优秀网站看前端：小米Note介绍页面代码</a>
+<li><a href="http://developer.51cto.com/art/201502/464632.htm" target="_blank" title="软件项目将死的 27 个征兆">软件项目将死的 27 个征兆</a>
+</ul></div>
+<div id="top10_3" style="display: none;" class="list"><ul>
+<li><a href="http://developer.51cto.com/art/201501/464174.htm" target="_blank" title="近200篇机器学习&深度学习资料分享（含">近200篇机器学习&深度学习资料分享（含</a>
+<li><a href="http://developer.51cto.com/art/201501/463840.htm" target="_blank" title="2015年薪酬大涨的15个IT岗位">2015年薪酬大涨的15个IT岗位</a>
+<li><a href="http://developer.51cto.com/art/201501/463946.htm" target="_blank" title="成为高级程序员的 10 个步骤">成为高级程序员的 10 个步骤</a>
+<li><a href="http://developer.51cto.com/art/201501/464113.htm" target="_blank" title="程序员愤怒了：我们不仅要当管理者还要">程序员愤怒了：我们不仅要当管理者还要</a>
+<li><a href="http://developer.51cto.com/art/201501/463234.htm" target="_blank" title="2015年1月编程语言排行榜：JavaScript">2015年1月编程语言排行榜：JavaScript</a>
+<li><a href="http://developer.51cto.com/art/201501/463338.htm" target="_blank" title="参考淘宝团队实践：一个简单粗暴的前后">参考淘宝团队实践：一个简单粗暴的前后</a>
+<li><a href="http://developer.51cto.com/art/201501/464232.htm" target="_blank" title="2014年最热门的国人开发开源软件TOP100">2014年最热门的国人开发开源软件TOP100</a>
+<li><a href="http://developer.51cto.com/art/201501/464170.htm" target="_blank" title="不要浪费时间去写所谓的完美代码">不要浪费时间去写所谓的完美代码</a>
+<li><a href="http://developer.51cto.com/art/201501/464543.htm" target="_blank" title="PHP对战Node.js：一场关于开发者喜好的">PHP对战Node.js：一场关于开发者喜好的</a>
+<li><a href="http://developer.51cto.com/art/201501/464238.htm" target="_blank" title="关于大型网站技术演进的思考：存储的瓶">关于大型网站技术演进的思考：存储的瓶</a>
+</ul></div>
+ 
+ </div>
+<p class="blank1"></p>
+
+<div class="bor">
+<div class="titbg">
+<h3 class="fl t1">热点专题</h3>
+<a href="http://developer.51cto.com/speclist/1013" class="tmore">更多&gt;&gt;</a></div>
+<ul class="plist01">
+<li><a href="http://developer.51cto.com/art/201309/411913.htm" title="JavaScript成为网络霸主的“绯闻”"><img src="http://s9.51cto.com/wyfs01/M02/2F/E4/wKioJlJHn8DC9RVYAAAv2xgpMSU902.png" alt="JavaScript成为网络霸主的“绯闻”" width="100" height="80" /></a>
+<h5><a href="http://developer.51cto.com/art/201309/411913.htm" title="JavaScript成为网络霸主的“绯闻”">JavaScript成为网络霸</a></h5>
+<div class="c666">JavaScript正凭借新型工具与功能提升以极度夸张的速度</div>
+</li><li><a href="http://developer.51cto.com/art/201309/411803.htm" title="开发频道2013年9月第4周重点内容推荐：值得尝试的七大前沿性编程实验"><img src="http://s7.51cto.com/wyfs01/M02/2F/C6/wKioJlJFH9jxdzYPAAAY4WF2i1M859.jpg" alt="开发频道2013年9月第4周重点内容推荐：值得尝试的七大前沿性编程实验" width="100" height="80" /></a>
+<h5><a href="http://developer.51cto.com/art/201309/411803.htm" title="开发频道2013年9月第4周重点内容推荐：值得尝试的七大前沿性编程实验">开发频道2013年9月第4</a></h5>
+<div class="c666">国庆假期前的612，是不是有点折腾？网上的中秋国庆放</div>
+</li><li><a href="http://developer.51cto.com/art/201309/411713.htm" title="Java之数组基础应用回顾"><img src="http://s4.51cto.com/wyfs01/M02/2F/B6/wKioJlJD3fbz9SEKAAAXRRoVtDo224.jpg" alt="Java之数组基础应用回顾" width="100" height="80" /></a>
+<h5><a href="http://developer.51cto.com/art/201309/411713.htm" title="Java之数组基础应用回顾">Java之数组基础应用回</a></h5>
+<div class="c666">刚刚开始接触java数组的人都会听到一句类似的话：java</div>
+</li> 
+</ul>
+</div>
+<p class="blank10"></p>
+<div class="tagCloud">
+<div class="tlt">
+<h3>热点标签</h3>
+</div>
+<div class="taglist"><A title=编程语言排行榜 href="http://developer.51cto.com/art/200911/165281.htm">编程语言排行榜</A> <A title=敏捷开发 href="http://developer.51cto.com/art/200803/68222.htm">敏捷开发</A> <A title=Eclipse href="http://developer.51cto.com/art/201006/207407.htm">Eclipse 3.6</A> <A title=PHP设计模式 href="http://developer.51cto.com/art/201004/195765.htm">PHP设计模式</A> <A title=NetBeans7 href="http://developer.51cto.com/art/201105/259431.htm">NetBeans 7</A> <A title=Java7 href="http://developer.51cto.com/art/201001/175830.htm">Java7</A> <A title=Scala编程语言 href="http://developer.51cto.com/art/200906/127830.htm">Scala编程语言</A> <A title=Python编程世界 href="http://developer.51cto.com/art/201011/234347.htm">Python编程世界</A> <A title=Ruby On Rails开发 href="http://developer.51cto.com/art/201007/215101.htm">Ruby On Rails开发</A> <A class=imp title=LINQ href="http://developer.51cto.com/art/200911/165090.htm">LINQ</A> <A title=ASP.NET视频教程 href="http://developer.51cto.com/art/200904/120314.htm">ASP.NET视频教程</A> <A title="Visual Studio" href="http://developer.51cto.com/art/201004/194262.htm">Visual Studio</A> <A title="智能手机" href="http://p.linkphone.cn/">智能手机</A> <A title="软件下载" href="http://download.linkphone.cn/">软件下载</A></div>
+</div>
+<div class="rss">
+<ul>
+<li class="lin f12-c"><a href="http://news.51cto.com/col/1323/"><strong>点击这里查看样刊</strong></a></li>
+<li>
+<dl>
+<dt> </dt>
+<dd><a href="http://home.51cto.com/index.php?s=/Subscribe"><img src="http://images.51cto.com/images/art0910/images/dingy.gif" /></a></dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="bor">
+<div class="titbg">
+<h3 class="t1">全站热点</h3>
+</div>
+<div class="webhot fixfloat">
+<ul>
+
+<li>
+  <a href="http://mobile.51cto.com/market-408462.htm"  title="App营销之ASO应用商店优化攻略"><img src="http://s4.51cto.com/wyfs01/M00/17/6D/wKioOVIdcyXiY1CVAABFnIenMdo436.jpg" /></a>
+  <div><a href="http://mobile.51cto.com/market-408462.htm"  title="App营销之ASO应用商店优化攻略">App营销之ASO应用商店优化攻略</a></div>
+</li>
+
+<li>
+  <a href="http://network.51cto.com/network/ruijie/newton-video/"  title="网络世界的Newton"><img src="http://s8.51cto.com/wyfs01/M01/17/6A/wKioOVIdcMfwql8tAACW4jbaj_M992.jpg" /></a>
+  <div><a href="http://network.51cto.com/network/ruijie/newton-video/"  title="网络世界的Newton">网络世界的Newton</a></div>
+</li>
+
+</ul>
+</div>
+<p class="blank1"></p>
+<ul class="list03">
+
+<li><a href="http://book.51cto.com/art/201309/411997.htm"  title="深度探索Linux操作系统：系统构建和原理解析">深度探索Linux操作系统：系统构建和</a></li>
+
+<li><a href="http://book.51cto.com/art/201309/411934.htm"  title="Linux软件管理平台设计与实现">Linux软件管理平台设计与实现</a></li>
+
+<li><a href="http://developer.51cto.com/art/201309/411913.htm"  title="JavaScript成为网络霸主的“绯闻”">JavaScript成为网络霸主的“绯闻”</a></li>
+
+<li><a href="http://server.51cto.com/ManageDC-411893.htm"  title="机器人如何帮助简化数据中心管理">机器人如何帮助简化数据中心管理</a></li>
+
+<li><a href="http://server.51cto.com/PowerSupply-411889.htm"  title="eBay公布配备燃料电池的数据中心方案">eBay公布配备燃料电池的数据中心方案</a></li>
+
+</ul>
+</div>
+<p class="blank10"></p>
+<div class="bor">
+<div class="titbg">
+<h3 class="t1">读书</h3>
+</div>
+  
+<div class="catbook"><a href="http://book.51cto.com/art/200710/57877.htm" title="SQL Server 2005中文版精粹"><img src="http://images.51cto.com/files/uploadimg/20071012/161813721.gif" width="66" height="98" border="0" /></a>
+<h5><a href="http://book.51cto.com/art/200710/57877.htm">SQL Server 2005中文版精粹</a></h5>
+<div class="c666 text">本书内容包括：
+    ● 框架的总览：SQL Server 2005的功能是如何集成在一起的，以及这些功能对于用户的意义。
+    ● 安全性</div>
+</div>
+
+
+<ul class="list03">
+
+<li><a href="http://book.51cto.com/art/200704/45528.htm" title="软件设计师考试全真模拟试题及解析">软件设计师考试全真模拟试题及解析</a></li>
+
+<li><a href="http://book.51cto.com/art/200704/45590.htm" title="网络管理员考试全真模拟试题与解析">网络管理员考试全真模拟试题与解析</a></li>
+
+<li><a href="http://book.51cto.com/art/200704/45708.htm" title="Windows Server 2003网络管理员完全手册">Windows Server 2003网络管理员完全手册</a></li>
+
+<li><a href="http://book.51cto.com/art/200704/45743.htm" title="点石成金：访客至上的网页设计秘笈（原书第2版）">点石成金：访客至上的网页设计秘笈（原书第2版）</a></li>
+
+</ul>
+</div>
+<p class="blank10"></p>
+<div class="bor">
+<div class="titbg">
+<h3 class="t1 fl">博文推荐</h3>
+<a class="tmore" href="http://blog.51cto.com/">更多&gt;&gt;</a></div>
+
+<ul class="list03">
+ <li><a href="http://august.blog.51cto.com/59588/9482/" target="_blank" title="“神奇”的autorun—硬盘自动播放">“神奇”的autorun—硬盘自动播放</a></li><li><a href="http://yangsir.blog.51cto.com/1549/9479/" target="_blank" title="CA精简什么？——CA EXPO现场亲历">CA精简什么？——CA EXPO现场亲历</a></li><li><a href="http://69032.blog.51cto.com/59032/9473/" target="_blank" title="卸载GFI LANguard Portable Storage Control 2.0">卸载GFI LANguard Portable Storage </a></li><li><a href="http://xwg999.blog.51cto.com/13178/9472/" target="_blank" title="Linux中无法连网的几个大问题">Linux中无法连网的几个大问题</a></li>
+</ul>
+</div>
+<p class="blank10"></p>
+<div class="tj">
+<div class="tlt">
+<h3>最新热帖</h3>
+<a class="more" href="http://bbs.51cto.com/hotthreads.php">更多&gt;&gt;</a></div>
+<ul>
+<li><a href="http://bbs.51cto.com/thread-903529-1.html" target="_blank" title="一般晓通或者神马面试之后 一般几天能有消息呢">一般晓通或者神马面试之后 一般几天</a></li><li><a href="http://bbs.51cto.com/thread-903424-1.html" target="_blank" title="求职: LINUX嵌入式开发">求职: LINUX嵌入式开发</a></li><li><a href="http://bbs.51cto.com/thread-883685-1.html" target="_blank" title="发一下思科中国的总代以及金牌合作公司">发一下思科中国的总代以及金牌合作公</a></li><li><a href="http://bbs.51cto.com/thread-879932-1.html" target="_blank" title="我想找一个综合布线的工作，请问工资大概要多少？给点意见">我想找一个综合布线的工作，请问工资</a></li><li><a href="http://bbs.51cto.com/thread-838479-1.html" target="_blank" title="面试之自我救赎">面试之自我救赎</a></li>
+</ul>
+</div>
+<div class="picAD">
+<script language="JavaScript" src="http://www.51cto.com/ad/art/baidugoogle/ad.js" type="text/javascript"></script>
+</div>
+</div>
+<p class="blank1"></p> 
+<!--leftbotcon end-->
+</div> 
+<div class="subweb">
+<h4>51CTO旗下网站</h4>
+<div>
+<a target="_blank" href="http://www.51cto.com/">领先的IT技术网站 51CTO</a>
+<a target="_blank" href="http://www.watchstor.com/">领先的中文存储媒体 WatchStor</a>
+<a target="_blank" href="http://www.cioage.com/">中国首个CIO网站 CIOage</a>
+<a target="_blank" href="http://www.hc3i.cn/">中国首家数字医疗网站 HC3i</a>
+</div>
+</div>
+<div id="ft"><div id="foot" align="center"><script src="http://images.51cto.com/images/copy_right/copy_right.js"></script></div></div>
+<script src="http://logs.51cto.com/rizhi/count/count.js"></script>
+<script type="text/javascript">
+
+	$("#uyan_cmt_list").next().remove();	
+	$("#uyan_cmt_list").next().css("display","none");	
+</script>
+<style>
+.Nfloat {
+    position: fixed;
+    right: 2%;
+    top: 35%;
+    z-index: 801;
+}
+</style>
+
+
+<!-- 新监测代码 -->
+<!-- 新监测代码 -->
+<div id="MyMoveAd" style="display:none">
+<span id="wordlink_1"><script src="http://www.51cto.com/ad/art/wordlink/wordlink1.js"></script></span>
+<span id="wordlink_2"><script src="http://www.51cto.com/ad/art/wordlink/wordlink2.js"></script></span>
+<span id="wordlink_3"><script src="http://www.51cto.com/ad/art/wordlink/wordlink3.js"></script></span>
+<span id="wordlink_4"><script src="http://www.51cto.com/ad/art/wordlink/wordlink4.js"></script></span>
+<span id="pinglun"><script language="JavaScript" src="http://www.51cto.com/php/getArtCount.php?artid=345156&type=all"></script></span>
+<span id="tonglan"><script language="JavaScript" src="http://www.51cto.com/ad/art/tonglan/ad.js"></script></span>
+<span id="wordlink"><script language="JavaScript" src="http://www.51cto.com/ad/art/wordlink/ad.js"></script></span>
+<script src="http://www.51cto.com/ad/art/wordlink/ad.js"></script>
+<span id="bookss"><script language="JavaScript" src="http://www.51cto.com/php/getBookData.php?artid="></script></span>
+</div>   
+<script language="javascript" src="http://www.51cto.com/js/article/favorite.js"></script>
+
+<script language="javaScript" src="http://www.51cto.com/php/dialog_utf8.js"></SCRIPT>
+<script language="javaScript" src="http://www.51cto.com/mail.js"></script>  
+<script type="text/javascript" src="http://home.51cto.com/apps/favorite/Tpl/default/Public/js/favorbox.js"></script>
+<script language="javascript" src="http://images.51cto.com/images/art/newart1012/clipboard.js"></script>
+<script language="javaScript"> 
+	var thistid=345156; 
+	
+	//收藏按钮
+	var favor_url = 'http://developer.51cto.com/art/201206/345156.htm';  // 如：http://bbs.51cto.com/thread-789649-1.html
+	var favor_title = 'Java程序员必知的8大排序';       //  
+	
+	//绑定复制按钮
+	copy('msnqqcopy', 'http://developer.51cto.com/art/201206/345156.htm', '分享到MSN/QQ的链接复制成功!');
+//	copy('bbscopy', '[url=http://developer.51cto.com/art/201206/345156.htm][u]Java程序员必知的8大排序[/u][/url]', '分享到论坛的UBB代码复制成功!');
+
+</script> 
+<script src=" http://home.51cto.com/index.php?s=/Index/getLoginStatus/reback/http%253A%252F%252Fdeveloper.51cto.com%252Fart%252F201206%252F345156.htm" charset='utf-8'></script>
+<script src="http://www.51cto.com/php/count.php?view=yes&artID=345156" language="javascript"></script>
+<script language="javascript">
+document.getElementById('books').innerHTML = document.getElementById("bookss").innerHTML; 
+</script>
+
+</body>
+</html>

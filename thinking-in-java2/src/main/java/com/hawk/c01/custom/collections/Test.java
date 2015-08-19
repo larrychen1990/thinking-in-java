@@ -9,6 +9,8 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Test {
 	// private static final Map map;
 	// static {
@@ -68,7 +70,17 @@ public class Test {
 		
 		
 		Test test = new Test();
+		
+		String[] stringArray = { "a", "b", "c", "d", "e" };
+		System.out.println(Arrays.toString(stringArray));
+		System.out.println(stringArray.toString());
 
+		
+		System.out.println(Arrays.binarySearch(stringArray, "a"));
+		
+		String join = StringUtils.join(stringArray, ".");
+		System.out.println(join);
+		
 	}
 	
 	{
