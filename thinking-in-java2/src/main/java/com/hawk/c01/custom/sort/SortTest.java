@@ -1,16 +1,11 @@
 package com.hawk.c01.custom.sort;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Arrays;
 
-import org.h2.command.dml.Merge;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import com.thoughtworks.xstream.core.util.QuickWriter;
 
 @FixMethodOrder(MethodSorters.JVM)
 public class SortTest {
@@ -37,6 +32,40 @@ public class SortTest {
 			System.out.print(intArr[i] + ",");
 		}
 
+	}
+
+	@Test
+	public void binaryInsertSort() {
+		int[] a = { 49, 38, 65, 97, 176, 213, 227, 49, 78, 34, 12, 164, 11, 18, 1 };
+
+		for (int i = 0; i < a.length; i++) {
+			int temp = a[i];
+			int left = 0;
+			int right = i - 1;
+			int mid = 0;
+
+			while (left <= right) {
+				mid = (left + right) / 2;
+				if (temp < a[mid]) {
+					right = mid - 1;
+				} else {
+					left = mid + 1;
+				}
+			}
+
+			for (int j = i - 1; j >= left; j--) {	// move back 1 if neccesary
+				a[j + 1] = a[j];
+			}
+
+			if (left != i) {
+				a[left] = temp;		// insert current value into the binary left
+			}
+
+		}
+
+		for (int i = 0; i < a.length; i++) {
+			System.out.print(a[i] + ",");
+		}
 	}
 
 	@Test
@@ -168,20 +197,65 @@ public class SortTest {
 	}
 
 	@Test
+	@Ignore
 	public void mergingSort() {
 		int a[] = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 5, 4, 62, 99, 98, 54, 56, 17, 18, 23, 34,
 						15, 35, 25, 53, 51 };
-		
-		
-		
+
+		sort(a, 0, a.length - 1);
+
+		for (int i = 0; i < a.length; i++) {
+			System.out.print(a[i] + ",");
+		}
 	}
-	
-	public void sort(int[] data, int left, int right){
-		
+
+	private void sort(int[] data, int left, int right) {
+		if (left < right) {
+			// 找出中间索引
+			int center = (left + right) / 2;
+
+			// 对左边数组进行递归
+			sort(data, left, center);
+
+			// 对右边数组进行递归
+			sort(data, center + 1, right);
+
+			// 合并
+			merge(data, left, center, right);
+
+		}
 	}
-	
-	public void merge(int[] data, int left, int center, int right){
-		
+
+	private void merge(int[] data, int left, int center, int right) {
+		int[] tmpArr = new int[data.length];
+		int mid = center + 1;
+		// third记录中间数组的索引
+		int third = left;
+		int tmp = left;
+
+		while (left <= center && mid <= right) {
+			// 从两个数组中取出最小的放入中间数组
+			if (data[left] <= data[mid]) {
+				tmpArr[third++] = data[left++];
+			} else {
+				tmpArr[third++] = data[mid++];
+			}
+		}
+
+		// 剩余部分依次放入中间数组
+		while (mid <= right) {
+			tmpArr[third++] = data[mid++];
+		}
+		while (left <= center) {
+			tmpArr[third++] = data[left++];
+		}
+		// 将中间数组中的内容复制回原数组
+		while (tmp <= right) {
+			data[tmp] = tmpArr[tmp++];
+		}
+
+		System.out.println(Arrays.toString(data));
+
 	}
 
 	@Test
