@@ -1,3 +1,5 @@
+package com.hawk.corejava.v1ch03.InputTest;
+
 import java.util.*;
 
 /**

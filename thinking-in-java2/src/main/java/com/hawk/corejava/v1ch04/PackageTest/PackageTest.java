@@ -1,3 +1,5 @@
+package com.hawk.corejava.v1ch04.PackageTest;
+
 import com.horstmann.corejava.*;
 // the Employee class is defined in that package
 

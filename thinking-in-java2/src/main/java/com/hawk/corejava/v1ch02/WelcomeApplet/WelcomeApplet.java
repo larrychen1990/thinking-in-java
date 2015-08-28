@@ -1,3 +1,5 @@
+package com.hawk.corejava.v1ch02.WelcomeApplet;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
